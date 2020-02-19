@@ -75,7 +75,7 @@ int RXLED = 17;  // The RX LED has a defined Arduino pin
 
 //--------------- Create an AD9833 object ----------------
 // Note, SCK and MOSI must be connected to CLK and DAT pins on the AD9833 for SPI
-AD9833 gen_1(FNC_PIN_1);       // Defaults to 25MHz internal reference frequency
+AD9833 gen(FNC_PIN_1);       // Defaults to 25MHz internal reference frequency
 
 void setup() {
   //start gen
