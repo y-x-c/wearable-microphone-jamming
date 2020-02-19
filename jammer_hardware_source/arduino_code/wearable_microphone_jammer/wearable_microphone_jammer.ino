@@ -66,8 +66,8 @@
 
 #include "AD9833.h"
 
-#define FNC_PIN_1 A0
-#define chipSel1 A1
+#define FNC_PIN A0
+#define SEL_PIN A1
 
 int gen_freq = 25000;
 
@@ -75,24 +75,24 @@ int RXLED = 17;  // The RX LED has a defined Arduino pin
 
 //--------------- Create an AD9833 object ----------------
 // Note, SCK and MOSI must be connected to CLK and DAT pins on the AD9833 for SPI
-AD9833 gen(FNC_PIN_1);       // Defaults to 25MHz internal reference frequency
+AD9833 gen(FNC_PIN);       // Defaults to 25MHz internal reference frequency
 
 void setup() {
   //start gen
   gen.Begin();
-  pinMode(chipSel1, OUTPUT);
+  pinMode(SEL_PIN, OUTPUT);
   //set gen to SINE
   gen.ApplySignal(SINE_WAVE, REG0, gen_freq);
   //start gens
   gen.EnableOutput(true);
   //put both PGAs at max output
-  MCP41010Write(255, chipSel1);
+  MCP41010Write(255, SEL_PIN);
   SPI.setDataMode(SPI_MODE2);
 }
 
 void loop() {
   gen.ApplySignal(SINE_WAVE, REG0, random(24000, 26000));
-  MCP41010Write(255, chipSel1);
+  MCP41010Write(255, SEL_PIN);
 }
 
 //  function below adapted from http://henrysbench.capnfatz.com/henrys-bench/arduino-output-devices/mcp41010-digital-potentiometer-arduino-user-manual/
